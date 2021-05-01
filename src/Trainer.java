@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
-public class Trainer {
+public class Trainer implements Database {
 
 	private String name;
 	private int wins;
@@ -15,14 +16,26 @@ public class Trainer {
 	 * @param name String
 	 */
 	public Trainer(String name) {
-		// TODO: get data from file and if none matches the name, then do a default initialize
-		// else initialize to the data found
 		this.name = name;
-		this.wins = 0;
-		this.losses = 0;
-		this.coins = 0;
-		this.pokemonInv = new ArrayList<>();
 		this.itemInv = new ArrayList<>();
+		this.pokemonInv = new ArrayList<>();
+
+		Object obj = load();
+		// if the object is empty it won't be of type Trainer
+		if (obj instanceof Trainer) {
+			Trainer t = (Trainer) obj;
+			this.wins = t.wins;
+			this.losses = t.losses;
+			this.coins = t.coins;
+			for (Item item : t.itemInv) {
+				addItem(new Item(item.getName(), item.getPrice()));
+			}
+			// TODO: need to load pokemon
+		} else {
+			this.wins = 0;
+			this.losses = 0;
+			this.coins = 0;
+		}
 	}
 
 	/**
@@ -31,6 +44,11 @@ public class Trainer {
 	 */
 	public String printStats() {
 		return "Wins: " + getWins() + "\nLosses: " + getLosses();
+	}
+
+	@Override
+	public Object getData() {
+		return this;
 	}
 
 	/**
@@ -64,6 +82,7 @@ public class Trainer {
 	/**
 	 * @return the name of the trainer
 	 */
+	@Override
 	public String getName() {
 		return this.name;
 	}
@@ -124,6 +143,14 @@ public class Trainer {
 	}
 
 	/**
+	 * @param i int
+	 * @return the pokemon at index i
+	 */
+	public Pokemon getPokemon(int i) {
+		return this.pokemonInv.get(i);
+	}
+
+	/**
 	 * adds the item to the trainer's inventory
 	 * @param item item object
 	 */
@@ -139,21 +166,19 @@ public class Trainer {
 		this.itemInv.remove(i);
 	}
 
-	// TODO: add methods to get a pokemon and item
-
 	/**
-	 * finds and removes the specified trainer's item
+	 * removes the specified trainer's item
 	 * @param item item object
 	 */
-	public void removePokemon(Item item) {
+	public void removeItem(Item item) {
 		this.itemInv.remove(item);
 	}
 
-	public void saveDataToFile(String filename) {
-		// TODO: write this method to be called on program start and end
-	}
-
-	public void getTrainerFromFile(String filename) {
-		// TODO: add a trainer from database; save and query it in JSON
+	/**
+	 * @param i int
+	 * @return the item at index i
+	 */
+	public Item getItem(int i) {
+		return this.itemInv.get(i);
 	}
 }

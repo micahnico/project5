@@ -1,6 +1,9 @@
 import java.util.ArrayList;
-import java.util.HashSet;
 
+/**
+ * the player of the game. Has pokemon and items
+ * @author micahnico
+ */
 public class Trainer implements Database {
 
 	private String name;
@@ -30,7 +33,7 @@ public class Trainer implements Database {
 			for (Item item : t.itemInv) {
 				addItem(new Item(item.getName(), item.getPrice()));
 			}
-			// TODO: need to load pokemon
+			// TODO: need to figure out how to load pokemon
 		} else {
 			this.wins = 0;
 			this.losses = 0;
@@ -43,9 +46,12 @@ public class Trainer implements Database {
 	 * @return wins and losses
 	 */
 	public String printStats() {
-		return "Wins: " + getWins() + "\nLosses: " + getLosses();
+		return "Stats for " + getName() + "\nWins: " + getWins() + "\nLosses: " + getLosses() + "\nCoins: " + getCoins();
 	}
 
+	/**
+	 * @return current object in a generic reference Object class
+	 */
 	@Override
 	public Object getData() {
 		return this;

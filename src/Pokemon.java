@@ -3,7 +3,6 @@ import java.util.ArrayList;
 abstract public class Pokemon {
 
 	private int maxHealth;
-	private String typePokemon;
 	private int currentHealth;
 	private int baseDamage;
 	private int critDamage;
@@ -15,17 +14,11 @@ abstract public class Pokemon {
 		this.currentHealth = maxHealth;
 		baseDamage = 0;
 		critDamage = 0;
-		if(type != "Air" || type != "Earth" || type != "Fire" || type != "Water") {
-			System.out.println("Please enter a valid Pokemon type of Air, Earth, Fire, or Water.");
-		}
-		else {
-			typePokemon = type;
-		}
 	}
 
-	// returns type of Pokemon
-	public String getTypePokemon() {
-		return typePokemon;
+	// returns name of Pokemon
+	public String getName() {
+		return name;
 	}
 
 	// returns Pokemons possible max health

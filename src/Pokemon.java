@@ -7,8 +7,10 @@ abstract public class Pokemon {
 	private int currentHealth;
 	private int baseDamage;
 	private int critDamage;
+	private String name;
 
-	public Pokemon(String type) {
+	public Pokemon(String type, String newName) {
+		name = newName;
 		maxHealth = 100;
 		this.currentHealth = maxHealth;
 		baseDamage = 0;

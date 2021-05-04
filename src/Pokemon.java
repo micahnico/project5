@@ -18,25 +18,22 @@ import java.util.Scanner;
 	private ArrayList<Attack> attacks;
 	private ArrayList<Defense> defenses;
 
-	public Pokemon(String type, String newName) {
-		name = newName;
-		maxHealth = 100;
+	public Pokemon(String type, String newName, int maxHealth, int baseDamage, int critDamage) {
+		this.typePokemon = type;
+		this.name = newName;
+		this.maxHealth = maxHealth;
 		this.currentHealth = maxHealth;
-		baseDamage = 0;
-		critDamage = 0;
-		if(type != "Air" || type != "Earth" || type != "Fire" || type != "Water") {
-			System.out.println("Please enter a valid Pokemon type of Air, Earth, Fire, or Water.");
-		}
-		else {
-			typePokemon = type;
-		}
+		this.baseDamage = baseDamage;
+		this.critDamage = critDamage;
 		attacks = new ArrayList<>();
 		defenses = new ArrayList<>();
 	}
 
+	public String getName() {
+		return this.name;
+	}
 
-
-	// returns type of Pokemon
+		// returns type of Pokemon
 	public String getTypePokemon() {
 		return typePokemon;
 	}

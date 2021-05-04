@@ -5,8 +5,10 @@ public class Item {
 	private int price;
 	
 	public Item(String name, int price) {
+		this.name = name;
+		this.price = price;
 	}
-	
+
 	// returns item name
 	public String getName() {
 		return name;

@@ -30,7 +30,9 @@ public class Trainer implements Database {
 			for (Item item : t.itemInv) {
 				addItem(new Item(item.getName(), item.getPrice()));
 			}
-			// TODO: need to load pokemon
+			for (Pokemon p : t.pokemonInv) {
+				addPokemon(p);
+			}
 		} else {
 			this.wins = 0;
 			this.losses = 0;
@@ -119,6 +121,13 @@ public class Trainer implements Database {
 	}
 
 	/**
+	 * @return the trainer's inventory of pokemon
+	 */
+	public ArrayList<Pokemon> pokemon() {
+		return this.pokemonInv;
+	}
+
+	/**
 	 * adds the pokemon to the trainer's collection
 	 * @param p pokemon object
 	 */
@@ -148,6 +157,13 @@ public class Trainer implements Database {
 	 */
 	public Pokemon getPokemon(int i) {
 		return this.pokemonInv.get(i);
+	}
+
+	/**
+	 * @return the trainer's inventory of pokemon
+	 */
+	public ArrayList<Item> items() {
+		return this.itemInv;
 	}
 
 	/**

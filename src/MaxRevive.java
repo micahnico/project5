@@ -6,8 +6,8 @@ public class MaxRevive extends Item {
 	
 	@Override
 	public void use(Pokemon p) {
-		if(p.currentHealth == 0) {
-			p.currentHealth += 50;
+		if(p.getCurrentHealth() == 0) {
+			p.setToMaxHealth();
 		}
 		else {
 			System.out.println("Pokemon must have health of 0 to use Max Revive.");

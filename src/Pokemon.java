@@ -70,6 +70,13 @@ public class Pokemon {
 		return attacks.get(i);
 	}
 
+	public void addHealth(int amt) {
+		this.currentHealth += amt;
+		if (this.currentHealth > this.maxHealth) {
+			this.currentHealth = maxHealth;
+		}
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

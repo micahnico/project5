@@ -7,13 +7,10 @@ public class Potion extends Item {
 	
 	@Override
 	public void use(Pokemon p) {
-		if(p.currentHealth < 90) {
-			p.currentHealth += 10;
+		if(p.getCurrentHealth() > 0) {
+			p.addHealth(10);
 		}
-		else if(p.currentHealth >= 90) {
-			p.currentHealth = p.maxHealth;
-		}
-		else if(p.currentHealth == 0) {
+		else {
 			System.out.println("Sorry, Pokemon must be revived in order to use Potion.");
 		}
 	}

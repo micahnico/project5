@@ -54,3 +54,4 @@ public class Item extends Trainer {
 		}
 		coins - 2;
 	}
+}

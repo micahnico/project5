@@ -1,13 +1,15 @@
 import java.util.ArrayList;
-import java.util.HashSet;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
+/**
+ * @author micahnico
+ */
 public class Trainer implements Database {
 
 	private String name;
 	private int wins;
 	private int losses;
 	private int coins;
-	// TODO: see what type of collections we need
 	private ArrayList<Pokemon> pokemonInv;
 	private ArrayList<Item> itemInv;
 
@@ -27,9 +29,8 @@ public class Trainer implements Database {
 			this.wins = t.wins;
 			this.losses = t.losses;
 			this.coins = t.coins;
-			for (Item item : t.itemInv) {
-				addItem(item);
-			}
+			// since items can never be modified once loaded, don't have to worry about deep copies
+			this.itemInv.addAll(t.itemInv);
 			for (Pokemon p : t.pokemonInv) {
 				addPokemon(p);
 			}
@@ -51,6 +52,22 @@ public class Trainer implements Database {
 	@Override
 	public Object getData() {
 		return this;
+	}
+
+	@Override
+	public RuntimeTypeAdapterFactory<Item> adapterFactory() {
+		return RuntimeTypeAdapterFactory.of(Item.class, "type")
+						.registerSubtype(MaxRevive.class, "MaxRevive")
+						.registerSubtype(Potion.class, "Potion")
+						.registerSubtype(SuperPotion.class, "SuperPotion");
+	}
+
+	/**
+	 * @return the name of the trainer
+	 */
+	@Override
+	public String getName() {
+		return this.name;
 	}
 
 	/**
@@ -79,14 +96,6 @@ public class Trainer implements Database {
 	 */
 	public void addLoss() {
 		this.losses++;
-	}
-
-	/**
-	 * @return the name of the trainer
-	 */
-	@Override
-	public String getName() {
-		return this.name;
 	}
 
 	/**
@@ -170,9 +179,13 @@ public class Trainer implements Database {
 	 * adds the item to the trainer's inventory
 	 * @param item item object
 	 */
-	public void addItem(Item item) {
-		this.itemInv.add(item);
-		removeCoins(item.getPrice());
+	public void addItem(Item item) throws Exception {
+		if (this.coins >= item.getPrice()) {
+			this.itemInv.add(item);
+			removeCoins(item.getPrice());
+		} else {
+			throw new Exception("Not enough coins");
+		}
 	}
 
 	/**

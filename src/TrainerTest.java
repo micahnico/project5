@@ -27,13 +27,17 @@ class TrainerTest {
   void pokemonAndItemMethods() {
     Trainer t = new Trainer("Test Trainer");
     Pokemon p = new Pokemon("Fire", "Test", 50);
-    Item item = new Item("Test", 700);
+    Item item = new Potion(700);
 
     t.addPokemon(p);
     t.addPokemon(p);
     assertEquals(t.getPokemon(0), p);
 
-    t.addItem(item);
+    try {
+      t.addItem(item);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     assertEquals(t.getItem(0), item);
 
     t.removePokemon(0);

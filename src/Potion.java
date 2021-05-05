@@ -1,16 +1,17 @@
+/**
+ * @author JoshSpicher
+ */
 public class Potion extends Item {
 	/**
 	 * creates a item called potion
-	 * @param name
 	 * @param price
-	 * JoshSpicher
 	 */
-	public Potion(String name, int price) {
-		super(name, price);
+	public Potion(int price) {
+		super(price);
 	}
+
 	/**
 	 * creates a use method for potion that restores 10 health to a pokemon of your choice
-	 * JoshSpicher
 	 */
 	@Override
 	public void use(Pokemon p) {

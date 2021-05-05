@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -11,10 +12,11 @@ import java.util.*;
  * runs the game until the player quits
  */
 public class Game {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		// loads the existing pokemon and items into the game
 		ArrayList<Pokemon> pokemon = loadPokemon();
-		ArrayList<Item> items = loadItems();
+		ArrayList<Item> items = new ArrayList<>(List.of(new MaxRevive(100), new Potion(100), new SuperPotion(100)));
+
 		Scanner sc=new Scanner(System.in);
 		//make new trainer and ask for option
 		System.out.println("What's your name trainer?");
@@ -57,28 +59,6 @@ public class Game {
 			allPokemon.add(gson.fromJson(reader, Pokemon.class));
 		}
 		return allPokemon;
-	}
-
-	/**
-	 * loads items from json files
-	 * @return all the found items
-	 * @author micahnico
-	 */
-	public static ArrayList<Item> loadItems() {
-		ArrayList<Item> allItems = new ArrayList<>();
-		Set<String> filesToLoad = loadDirectory(new File("items"));
-		Reader reader;
-
-		for (String file : filesToLoad) {
-			try {
-				reader = Files.newBufferedReader(Paths.get(file));
-			} catch (IOException e) {
-				return null;
-			}
-			Gson gson = new Gson();
-			allItems.add(gson.fromJson(reader, Item.class));
-		}
-		return allItems;
 	}
 
 	/**

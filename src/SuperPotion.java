@@ -1,17 +1,17 @@
+/**
+ * @author JoshSpicher
+ */
 public class SuperPotion extends Item{
-	
+
 	/**
 	 * creates a item called SuperPotion
-	 * @param name 
 	 * @param price
-	 * JoshSpicher
 	 */ 
-	public SuperPotion(String name, int price) {
-		super(name, price);
+	public SuperPotion(int price) {
+		super(price);
 	}
 	/**
 	 * creates use method for super potion that restores 25 health to pokemon of your choice
-	 * JoshSpicher
 	 */
 	@Override
 	public void use(Pokemon p) {

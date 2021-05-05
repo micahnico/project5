@@ -13,4 +13,7 @@ public class Battle {
 			// and then
 			p2.takeDamage(healthToRemove);
 		}
+
+
+
 }

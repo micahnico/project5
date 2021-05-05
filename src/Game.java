@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * runs the game until the player quits
@@ -18,6 +15,26 @@ public class Game {
 		// loads the existing pokemon and items into the game
 		ArrayList<Pokemon> pokemon = loadPokemon();
 		ArrayList<Item> items = loadItems();
+		Scanner sc=new Scanner(System.in);
+		//make new trainer and ask for option
+		System.out.println("What's your name trainer?");
+		String name=sc.next();
+		Trainer active = new Trainer(name);
+		System.out.println("Welcome "+name);
+
+		int opt=0;
+		while(opt<1){
+			System.out.println("What are you looking to do?");
+			if (!sc.hasNextInt()){
+				System.out.println("Only enter your number options");
+				opt=0;
+			}
+			else {
+
+			}
+		}
+
+
 	}
 
 	/**
@@ -81,5 +98,6 @@ public class Game {
 		}
 		return filesToLoad;
 	}
+
 
 }

@@ -28,7 +28,7 @@ public class Trainer implements Database {
 			this.losses = t.losses;
 			this.coins = t.coins;
 			for (Item item : t.itemInv) {
-				addItem(new Item(item.getName(), item.getPrice()));
+				addItem(item);
 			}
 			for (Pokemon p : t.pokemonInv) {
 				addPokemon(p);
@@ -132,7 +132,7 @@ public class Trainer implements Database {
 	 * @param p pokemon object
 	 */
 	public void addPokemon(Pokemon p) {
-		this.pokemonInv.add(p);
+		this.pokemonInv.add(new Pokemon(p));
 	}
 
 	/**
@@ -172,22 +172,15 @@ public class Trainer implements Database {
 	 */
 	public void addItem(Item item) {
 		this.itemInv.add(item);
+		removeCoins(item.getPrice());
 	}
 
 	/**
 	 * removes the trainer's item at index i
 	 * @param i index of item
 	 */
-	public void removeItem(int i) {
-		this.itemInv.remove(i);
-	}
-
-	/**
-	 * removes the specified trainer's item
-	 * @param item item object
-	 */
-	public void removeItem(Item item) {
-		this.itemInv.remove(item);
+	public Item removeItem(int i) {
+		return this.itemInv.remove(i);
 	}
 
 	/**

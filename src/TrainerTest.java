@@ -26,14 +26,13 @@ class TrainerTest {
   @Test
   void pokemonAndItemMethods() {
     Trainer t = new Trainer("Test Trainer");
-    Pokemon p = new Pokemon("Fire", "Test", 50, 50, 50);
+    Pokemon p = new Pokemon("Fire", "Test", 50);
     Item item = new Item("Test", 700);
 
     t.addPokemon(p);
     t.addPokemon(p);
     assertEquals(t.getPokemon(0), p);
 
-    t.addItem(item);
     t.addItem(item);
     assertEquals(t.getItem(0), item);
 
@@ -42,7 +41,6 @@ class TrainerTest {
     assertEquals(t.pokemon().size(), 0);
 
     t.removeItem(0);
-    t.removeItem(item);
     assertEquals(t.items().size(), 0);
   }
 }

@@ -5,15 +5,15 @@ import java.util.Scanner;
 
 public class Pokemon {
 
-	private int maxHealth;
-	private String typePokemon;
+	final private int maxHealth;
+	final private String typePokemon;
 	private int currentHealth;
-	private String name;
+	final private String name;
 
 	//There is an inheritance three of attacks
 	//Lists of attacks of the pokemon
-	private ArrayList<Attack> attacks;
-	private ArrayList<Defense> defenses;
+	final private ArrayList<Attack> attacks;
+	final private ArrayList<Defense> defenses;
 
 	public Pokemon(String type, String newName, int maxHealth) {
 		this.typePokemon = type;
@@ -22,6 +22,16 @@ public class Pokemon {
 		this.currentHealth = maxHealth;
 		attacks = new ArrayList<>();
 		defenses = new ArrayList<>();
+	}
+
+	public Pokemon(Pokemon other) {
+		this.typePokemon = other.typePokemon;
+		this.name = other.name;
+		this.maxHealth = other.maxHealth;
+		this.currentHealth = other.maxHealth;
+		// don't have to worry about referencing the same place in memory since we shouldn't ever modify these
+		attacks = other.attacks;
+		defenses = other.defenses;
 	}
 
 	public String getName() {
@@ -58,6 +68,18 @@ public class Pokemon {
 
 	public Attack getAttack(int i) {
 		return attacks.get(i);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (!(o instanceof Pokemon)) {
+			return false;
+		}
+		Pokemon m = (Pokemon) o;
+		return this.typePokemon.equals(m.typePokemon) && this.maxHealth == m.maxHealth && this.name.equals(m.name) && this.attacks.equals(m.attacks) && this.defenses.equals(m.defenses);
 	}
 
 }

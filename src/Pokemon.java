@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Pokemon {
+	final static int COST = 200;
 
 	final private int maxHealth;
 	final private String typePokemon;

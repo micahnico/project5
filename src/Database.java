@@ -15,17 +15,12 @@ import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 public interface Database {
   Object getData();
   String getName();
-
   /**
-   * this makes sure that if there are any classes that extend parents, that data is saved and instantiated to the correct type
-   * if not needed, don't override it
-   *
-   * @param <T> the type of the adapter factory
-   * @return the specified adapter factory
+   * allows each class that implements Database to save and load subtypes of classes
+   * since for some reason it doesn't by default
+   * @return gson object with every adapter
    */
-  default <T> RuntimeTypeAdapterFactory<T> adapterFactory() {
-    return null;
-  }
+  Gson gsonWithAdapters();
 
   /**
    * saves the current object to a json file of the same name of the object
@@ -33,8 +28,7 @@ public interface Database {
    */
   default void save() throws FileNotFoundException {
     PrintWriter out = new PrintWriter(getName() + ".json");
-    Gson gson = new GsonBuilder().registerTypeAdapterFactory(adapterFactory()).create();
-    String json = gson.toJson(getData());
+    String json = gsonWithAdapters().toJson(getData());
 
     out.print(json);
     out.flush();
@@ -52,7 +46,6 @@ public interface Database {
     } catch (IOException e) {
       return null;
     }
-    Gson gson = new GsonBuilder().registerTypeAdapterFactory(adapterFactory()).create();
-    return gson.fromJson(reader, getData().getClass());
+    return gsonWithAdapters().fromJson(reader, getData().getClass());
   }
 }

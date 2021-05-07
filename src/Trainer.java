@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 /**
@@ -55,11 +58,19 @@ public class Trainer implements Database {
 	}
 
 	@Override
-	public RuntimeTypeAdapterFactory<Item> adapterFactory() {
-		return RuntimeTypeAdapterFactory.of(Item.class, "type")
+	public Gson gsonWithAdapters() {
+		RuntimeTypeAdapterFactory<Item> itemAdapter = RuntimeTypeAdapterFactory.of(Item.class, "type")
 						.registerSubtype(MaxRevive.class, "MaxRevive")
 						.registerSubtype(Potion.class, "Potion")
 						.registerSubtype(SuperPotion.class, "SuperPotion");
+		RuntimeTypeAdapterFactory<Attack> attackAdapter =RuntimeTypeAdapterFactory.of(Attack.class, "type")
+						.registerSubtype(BlastAttack.class, "BlastAttack")
+						.registerSubtype(ChargeAttack.class, "ChargeAttack")
+						.registerSubtype(StormAttack.class, "StormAttack");
+		return new GsonBuilder()
+						.registerTypeAdapterFactory(itemAdapter)
+						.registerTypeAdapterFactory(attackAdapter)
+						.create();
 	}
 
 	/**

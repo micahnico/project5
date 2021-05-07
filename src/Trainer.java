@@ -143,8 +143,17 @@ public class Trainer implements Database {
 	/**
 	 * @return the trainer's inventory of pokemon
 	 */
-	public ArrayList<Pokemon> pokemon() {
+	public ArrayList<Pokemon> pokemonList() {
 		return this.pokemonInv;
+	}
+
+	/**
+	 * Prints the  pokemon list
+	 */
+	public void printPokemons(){
+		for (int i = 0; i < pokemonInv.size(); i ++){
+			System.out.println("-" + i +  " "+ getPokemon(i).getName());
+		}
 	}
 
 	/**
@@ -214,4 +223,7 @@ public class Trainer implements Database {
 	public Item getItem(int i) {
 		return this.itemInv.get(i);
 	}
+
+
+
 }

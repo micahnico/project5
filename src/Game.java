@@ -22,45 +22,47 @@ public class Game {
 		Scanner sc = new Scanner(System.in);
 		//make new trainer and ask for option
 		System.out.println("What's your name trainer?");
-		String name=sc.next();
+		String name = sc.next();
 		Trainer active = new Trainer(name);
 		System.out.println("Welcome " + name);
 
 		//Giving new Trainer a pokemon
-		Random rnd =  new Random();
-		receivePokemon(active, pokemon.get(rnd.nextInt(pokemon.size())));
+		if (active.pokemonList().size() == 0) {
+			Random rnd = new Random();
+			Pokemon p = pokemon.get(rnd.nextInt(pokemon.size()));
+			active.addPokemon(p);
+			System.out.println("Congratulations you have received a pokemon!");
+			System.out.println(p.getName());
+		}
 
 		//Presenting the menu
-		int opt =  presentMenu();
-
-		if (opt ==1){// Trainer wants to buy pokemon
+		int opt = presentMenu();
+		if (opt == 1) {// Trainer wants to buy pokemon
 			//I have no idea how the  store works
-
-		}
-		else  if(opt == 2 ){//Trainer wants to   fight
+		} else if (opt == 2) {//Trainer wants to fight
 			System.out.println("Choose a pokemon to fight with");
 			active.printPokemons();
 			int o = choosePokemon(active.pokemonList().size());
+			Random rnd = new Random();
 			Pokemon fighter = active.getPokemon(o);
 			Pokemon opponent = pokemon.get(rnd.nextInt(pokemon.size()));
-			System.out.println("\t--" +fighter.getName() + " againts " + opponent.getName() + "\t--");
+			System.out.println("\t--" + fighter.getName() + " againts " + opponent.getName() + "\t--");
 			Battle b = new Battle();
 			boolean hasWon = b.Fight(fighter, opponent);
 			if (hasWon) {
 				active.addWin();
 				System.out.println("Congratulations you received 100 coins!");
 				active.addCoins(100);
-			}
-			else{
+			} else {
 				active.addLoss();
 			}
-		}
-		else if(opt == 3){
+		} else if (opt == 3) {
 			active.printPokemons();
 			int o = choosePokemon(active.pokemonList().size());
 			Pokemon pok = active.getPokemon(o);
 			pok.getInfo();
 		}
+		active.save();
 	}
 
 	/**
@@ -105,12 +107,6 @@ public class Game {
 			filesToLoad.add(dir.getPath());
 		}
 		return filesToLoad;
-	}
-
-	public static void receivePokemon(Trainer t, Pokemon p){
-		System.out.println("Congratulations you have received a pokemon!");
-		System.out.println(p.getName());
-		t.addPokemon(p);
 	}
 
 	public static int presentMenu() throws Exception{

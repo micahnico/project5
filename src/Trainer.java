@@ -22,7 +22,6 @@ public class Trainer implements Database {
 	 */
 	public Trainer(String name) {
 		this.name = name;
-		this.itemInv = new ArrayList<>();
 		this.pokemonInv = new ArrayList<>();
 
 		Object obj = load();
@@ -32,8 +31,6 @@ public class Trainer implements Database {
 			this.wins = t.wins;
 			this.losses = t.losses;
 			this.coins = t.coins;
-			// since items can never be modified once loaded, don't have to worry about deep copies
-			this.itemInv.addAll(t.itemInv);
 			for (Pokemon p : t.pokemonInv) {
 				addPokemon(p);
 			}
@@ -187,43 +184,5 @@ public class Trainer implements Database {
 	public Pokemon getPokemon(int i) {
 		return this.pokemonInv.get(i);
 	}
-
-	/**
-	 * @return the trainer's inventory of pokemon
-	 */
-	public ArrayList<Item> items() {
-		return this.itemInv;
-	}
-
-	/**
-	 * adds the item to the trainer's inventory
-	 * @param item item object
-	 */
-	public void addItem(Item item) throws Exception {
-		if (this.coins >= item.getPrice()) {
-			this.itemInv.add(item);
-			removeCoins(item.getPrice());
-		} else {
-			throw new Exception("Not enough coins");
-		}
-	}
-
-	/**
-	 * removes the trainer's item at index i
-	 * @param i index of item
-	 */
-	public Item removeItem(int i) {
-		return this.itemInv.remove(i);
-	}
-
-	/**
-	 * @param i int
-	 * @return the item at index i
-	 */
-	public Item getItem(int i) {
-		return this.itemInv.get(i);
-	}
-
-
 
 }

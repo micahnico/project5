@@ -1,8 +1,6 @@
-import org.junit.Test;
-//import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-//import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TrainerTest {
   @Test
@@ -26,31 +24,16 @@ class TrainerTest {
   }
 
   @Test
-  void pokemonAndItemMethods() {
+  void pokemonMethods() {
     Trainer t = new Trainer("Test Trainer");
     Pokemon p = new Pokemon("Fire", "Test", 50);
-    Item item = new Potion(700);
 
-    try {
-      t.addPokemon(p);
-      t.addPokemon(p);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    t.addPokemon(p);
+    t.addPokemon(p);
     assertEquals(t.getPokemon(0), p);
-
-    try {
-      t.addItem(item);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    assertEquals(t.getItem(0), item);
 
     t.removePokemon(0);
     t.removePokemon(p);
-    assertEquals(t.pokemon().size(), 0);
-
-    t.removeItem(0);
-    assertEquals(t.items().size(), 0);
+    assertEquals(t.pokemonList().size(), 0);
   }
 }

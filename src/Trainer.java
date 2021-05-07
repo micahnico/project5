@@ -63,7 +63,7 @@ public class Trainer implements Database {
 						.registerSubtype(MaxRevive.class, "MaxRevive")
 						.registerSubtype(Potion.class, "Potion")
 						.registerSubtype(SuperPotion.class, "SuperPotion");
-		RuntimeTypeAdapterFactory<Attack> attackAdapter =RuntimeTypeAdapterFactory.of(Attack.class, "type")
+		RuntimeTypeAdapterFactory<Attack> attackAdapter = RuntimeTypeAdapterFactory.of(Attack.class, "type")
 						.registerSubtype(BlastAttack.class, "BlastAttack")
 						.registerSubtype(ChargeAttack.class, "ChargeAttack")
 						.registerSubtype(StormAttack.class, "StormAttack");

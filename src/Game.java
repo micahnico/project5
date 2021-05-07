@@ -1,4 +1,6 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,7 +57,11 @@ public class Game {
 			} catch (IOException e) {
 				return null;
 			}
-			Gson gson = new Gson();
+			RuntimeTypeAdapterFactory<Attack> attackAdapter = RuntimeTypeAdapterFactory.of(Attack.class, "type")
+							.registerSubtype(BlastAttack.class, "BlastAttack")
+							.registerSubtype(ChargeAttack.class, "ChargeAttack")
+							.registerSubtype(StormAttack.class, "StormAttack");
+			Gson gson = new GsonBuilder().registerTypeAdapterFactory(attackAdapter).create();
 			allPokemon.add(gson.fromJson(reader, Pokemon.class));
 		}
 		return allPokemon;

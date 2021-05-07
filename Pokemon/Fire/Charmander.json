@@ -1,1 +1,1 @@
-{"maxHealth":100,"currentHealth":100,"name":"Charmander","typePokemon":"Fire","attacks":[],"defenses":[]}
+{"maxHealth":100,"currentHealth":100,"name":"Charmander","typePokemon":"Fire","attacks":[{"name":"Overheat","element":"fire"},{"name":"Lava Plume","element":"fire"},{"name":"Inferno","element":"fire"}],"defenses":[{"name":"fire","type":"simple defense"},{"name":"fire","type":"Fire shell"},{"name":"fire","type":" Fire shield"}]}

@@ -1,1 +1,1 @@
-{"maxHealth":100,"currentHealth":100,"name":"Charizard","typePokemon":"Fire","attacks":[],"defenses":[]}
+{"maxHealth":100,"currentHealth":100,"name":"Charizard","typePokemon":"Fire","attacks":[{"name":"Fire Storm","element":"fire"},{"name":"FireCharge","element":"fire"},{"name":"Fire Blast","element":"fire"}],"defenses":[{"name":"fire","type":"simple defense"},{"name":"fire","type":"Fire shell"},{"name":"fire","type":" Fire shield"}]}

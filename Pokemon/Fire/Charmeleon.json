@@ -1,1 +1,1 @@
-{"maxHealth":100,"currentHealth":100,"name":"Charmeleon","typePokemon":"Fire","attacks":[],"defenses":[]}
+{"maxHealth":100,"currentHealth":100,"name":"Charmeleon","typePokemon":"Fire","attacks":[{"name":"Lava Storm","element":"fire"},{"name":"Heat Charge","element":"fire"},{"name":"Ember","element":"fire"}],"defenses":[{"name":"fire","type":"simple defense"},{"name":"fire","type":"Fire shell"},{"name":"fire","type":" Fire shield"}]}

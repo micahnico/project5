@@ -1,1 +1,1 @@
-{"maxHealth":100,"currentHealth":100,"name":"Dugtrio","typePokemon":"Earth","attacks":[],"defenses":[]}
+{"maxHealth":100,"currentHealth":100,"name":"Dugtrio","typePokemon":"Earth","attacks":[{"name":"RockFall","element":"earth"},{"name":"Accelerock","element":"earth"},{"name":"RockSmash","element":"earth"}],"defenses":[{"name":"earth","type":"simple defense"},{"name":"earth","type":"Rock Shell"},{"name":"earth","type":" Stone Shield"}]}

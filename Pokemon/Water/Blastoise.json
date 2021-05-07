@@ -1,1 +1,1 @@
-{"maxHealth":100,"currentHealth":100,"name":"Blastoise","typePokemon":"Water","attacks":[],"defenses":[]}
+{"maxHealth":100,"currentHealth":100,"name":"Blastoise","typePokemon":"Water","attacks":[{"name":"Whirlpool","element":"water"},{"name":"Water Pulse","element":"water"},{"name":"Octazooka","element":"water"}],"defenses":[{"name":"Simple defense","type":"simple"},{"name":"Water shell","type":"shell"},{"name":"Water shield","type":"shield"}]}

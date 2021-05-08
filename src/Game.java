@@ -28,40 +28,48 @@ public class Game {
 
 		//Giving new Trainer a pokemon
 		if (active.pokemonList().size() == 0) {
-			Random rnd = new Random();
-			Pokemon p = pokemon.get(rnd.nextInt(pokemon.size()));
-			active.addPokemon(p);
-			System.out.println("Congratulations you have received a pokemon!");
-			System.out.println(p.getName());
+			buyPokemon(active, pokemon);
 		}
 
-		//Presenting the menu
-		int opt = presentMenu();
-		if (opt == 1) {// Trainer wants to buy pokemon
-			//I have no idea how the  store works
-		} else if (opt == 2) {//Trainer wants to fight
-			System.out.println("Choose a pokemon to fight with");
-			active.printPokemons();
-			int o = choosePokemon(active.pokemonList().size());
-			Random rnd = new Random();
-			Pokemon fighter = active.getPokemon(o);
-			Pokemon opponent = pokemon.get(rnd.nextInt(pokemon.size()));
-			System.out.println("\t--" + fighter.getName() + " againts " + opponent.getName() + "\t--");
-			Battle b = new Battle();
-			boolean hasWon = b.Fight(fighter, opponent);
-			if (hasWon) {
-				active.addWin();
-				System.out.println("Congratulations you received 100 coins!");
-				active.addCoins(100);
-			} else {
-				active.addLoss();
+		int opt;
+		do {
+			//Presenting the menu
+			opt = presentMenu();
+			if (opt == 1) {// Trainer wants to buy pokemon
+				buyPokemon(active, pokemon);
+			} else if (opt == 2) {//Trainer wants to fight
+				System.out.println("Choose a pokemon to fight with");
+				active.printPokemon();
+				int o = choosePokemon(active.pokemonList().size());
+				Random rnd = new Random();
+				Pokemon fighter = active.getPokemon(o);
+				Pokemon opponent = pokemon.get(rnd.nextInt(pokemon.size()));
+				System.out.println("\t--" + fighter.getName() + " againts " + opponent.getName() + "\t--");
+				Battle b = new Battle();
+				boolean hasWon = b.Fight(fighter, opponent);
+				if (hasWon) {
+					active.addWin();
+					System.out.println("Congratulations you received 100 coins!");
+					active.addCoins(100);
+				} else {
+					System.out.println("You lost. Here's 1 coin to help you deal with your misery.");
+					active.addCoins(1);
+					active.addLoss();
+				}
+			} else if (opt == 3) {
+				System.out.println();
+				System.out.println("Current inventory: ");
+				active.printPokemon();
+				int max = active.pokemonList().size() - 1;
+				if (max < 0) {
+					continue;
+				}
+				int o = choosePokemon(max);
+				Pokemon pok = active.getPokemon(o);
+				pok.getInfo();
 			}
-		} else if (opt == 3) {
-			active.printPokemons();
-			int o = choosePokemon(active.pokemonList().size());
-			Pokemon pok = active.getPokemon(o);
-			pok.getInfo();
-		}
+		} while (opt > 0);
+
 		active.save();
 	}
 
@@ -112,36 +120,48 @@ public class Game {
 	public static int presentMenu() throws Exception{
 		Scanner sc = new Scanner(System.in);
 		//Options
+		System.out.println();
 		System.out.println("What are you looking to do?");
+		System.out.println("0- quit");
 		System.out.println("1- buy pokemon/item");
 		System.out.println("2- fight");
 		System.out.println("3- Inventory");
-		int opt=0;
-		while(opt < 1 && opt > 3) {
-
-			while (!sc.hasNextInt()) {
-				throw new Exception("Only enter your number options");
+		int opt = -1;
+		while (opt < 0 || opt > 3) {
+			System.out.print("Please enter a number between 0 and 3: ");
+			try {
+				opt = sc.nextInt();
+			} catch (Exception e) {
+				System.out.println("That's not a number!");
 			}
-			opt = sc.nextInt();
-			if(opt < 1 && opt > 3){
-				throw new Exception("Choose between 1, 2 and 3");
-			}
+			sc.nextLine();
 		}
 		return opt;
 	}
 
-	public static int choosePokemon(int max) throws Exception{
+	public static void buyPokemon(Trainer t, ArrayList<Pokemon> pokemon) {
+		if (t.getCoins() >= Pokemon.COST) {
+			Random rnd = new Random();
+			Pokemon p = pokemon.get(rnd.nextInt(pokemon.size()));
+			t.addPokemon(p);
+			t.removeCoins(Pokemon.COST);
+			System.out.println("Congratulations you have received a pokemon!");
+			System.out.println(p.getName());
+		} else {
+			System.out.println("You don't have enough coins to buy a pokemon");
+		}
+	}
+
+	public static int choosePokemon(int max) {
 		Scanner sc = new Scanner(System.in);
 
 		int opt=-1;
-		while(opt < 0 && opt > max) {
-
-			while (!sc.hasNextInt()) {
-				throw new Exception("Only enter your number options");
-			}
-			opt = sc.nextInt();
-			if(opt < 1 && opt > max){
-				throw new Exception("Choose a valid number");
+		while(opt < 0 || opt > max) {
+			System.out.print("Please enter a number between 0 and " + max + ": ");
+			try {
+				opt = sc.nextInt();
+			} catch (Exception e) {
+				System.out.println("That's not a number!");
 			}
 		}
 		return opt;

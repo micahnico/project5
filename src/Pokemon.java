@@ -36,15 +36,16 @@ public class Pokemon {
 	}
 
 	public void getInfo(){
-		System.out.println(getName() + ":\t type:" + getTypePokemon());
-		System.out.println("maxHealth" + getMaxHealth());
+		System.out.println("Name: " + getName());
+		System.out.println("Type: " + getTypePokemon());
+		System.out.println("Max Health: " + getMaxHealth());
 		System.out.println("Attacks:");
 		for(Attack a : attacks){
 			System.out.println(a.getName());
 		}
 		System.out.println("Defenses:");
 		for(Defense d : defenses){
-			System.out.println(d.getName());
+			System.out.println(d.getName() + " - " + d.getType());
 		}
 
 	}

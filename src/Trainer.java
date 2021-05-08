@@ -37,7 +37,7 @@ public class Trainer implements Database {
 		} else {
 			this.wins = 0;
 			this.losses = 0;
-			this.coins = 0;
+			this.coins = Pokemon.COST;
 		}
 	}
 
@@ -147,8 +147,8 @@ public class Trainer implements Database {
 	/**
 	 * Prints the  pokemon list
 	 */
-	public void printPokemons(){
-		for (int i = 0; i < pokemonInv.size(); i ++){
+	public void printPokemon(){
+		for (int i = 0; i < pokemonInv.size(); i++){
 			System.out.println("-" + i +  " "+ getPokemon(i).getName());
 		}
 	}

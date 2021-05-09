@@ -2,12 +2,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Battle {
-
-		public Battle(){
-
-		}
-
-		public boolean Fight(Pokemon p1, Pokemon p2) {
+		public static boolean fight(Pokemon p1, Pokemon p2) {
 			while(p1.getCurrentHealth() > 0 || p2.getCurrentHealth() > 0){
 				Random rnd = new Random();// genrates random number for the computer's moves
 				Scanner scn = new Scanner(System.in);// Scanner

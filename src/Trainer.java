@@ -149,7 +149,7 @@ public class Trainer implements Database {
 	 */
 	public void printPokemon(){
 		for (int i = 0; i < pokemonInv.size(); i++){
-			System.out.println("-" + i +  " "+ getPokemon(i).getName());
+			System.out.println((i+1) +  ". "+ getPokemon(i).getName());
 		}
 	}
 

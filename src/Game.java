@@ -21,7 +21,7 @@ public class Game {
 
 		Scanner sc = new Scanner(System.in);
 		//make new trainer and ask for option
-		System.out.println("What's your name trainer?");
+		System.out.print("What's your name trainer? ");
 		String name = sc.next();
 		Trainer active = new Trainer(name);
 		System.out.println("Welcome " + name);
@@ -29,6 +29,7 @@ public class Game {
 		//Giving new Trainer a pokemon
 		if (active.pokemonList().size() == 0) {
 			buyPokemon(active, pokemon);
+			active.save();
 		}
 
 		int opt;
@@ -45,8 +46,7 @@ public class Game {
 				Pokemon fighter = active.getPokemon(o);
 				Pokemon opponent = pokemon.get(rnd.nextInt(pokemon.size()));
 				System.out.println("\t--" + fighter.getName() + " againts " + opponent.getName() + "\t--");
-				Battle b = new Battle();
-				boolean hasWon = b.Fight(fighter, opponent);
+				boolean hasWon = Battle.fight(fighter, opponent);
 				if (hasWon) {
 					active.addWin();
 					System.out.println("Congratulations you received 100 coins!");
@@ -59,18 +59,18 @@ public class Game {
 			} else if (opt == 3) {
 				System.out.println();
 				System.out.println("Current inventory: ");
+				System.out.println("Enter the number beside each pokemon to view it");
 				active.printPokemon();
-				int max = active.pokemonList().size() - 1;
-				if (max < 0) {
+				int max = active.pokemonList().size();
+				if (max < 1) {
 					continue;
 				}
 				int o = choosePokemon(max);
 				Pokemon pok = active.getPokemon(o);
 				pok.getInfo();
 			}
+			active.save();
 		} while (opt > 0);
-
-		active.save();
 	}
 
 	/**
@@ -140,6 +140,7 @@ public class Game {
 	}
 
 	public static void buyPokemon(Trainer t, ArrayList<Pokemon> pokemon) {
+		System.out.println("You have " + t.getCoins() + " coins");
 		if (t.getCoins() >= Pokemon.COST) {
 			Random rnd = new Random();
 			Pokemon p = pokemon.get(rnd.nextInt(pokemon.size()));
@@ -156,14 +157,15 @@ public class Game {
 		Scanner sc = new Scanner(System.in);
 
 		int opt=-1;
-		while(opt < 0 || opt > max) {
-			System.out.print("Please enter a number between 0 and " + max + ": ");
+		while(opt <= 0 || opt > max) {
+			System.out.print("Please enter a viable number: ");
 			try {
 				opt = sc.nextInt();
 			} catch (Exception e) {
 				System.out.println("That's not a number!");
+				sc.nextLine();
 			}
 		}
-		return opt;
+		return opt - 1;
 	}
 }

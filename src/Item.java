@@ -23,9 +23,17 @@ public abstract class Item {
 	}
 
 	/**
+	 * @return The name of the item class, which is the name of the item
+	 */
+	public String getName() {
+		return this.getClass().getName();
+	}
+
+	/**
 	 * 
 	 * @param p the name of the pokemon you would like to use the item on
+	 * @return boolean of whether the item was able to be used or not
 	 */
-	public abstract void use(Pokemon p);
+	public abstract boolean use(Pokemon p);
 	
 }

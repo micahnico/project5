@@ -1,1 +1,1 @@
-{"maxHealth":100,"currentHealth":100,"name":"Golbat","typePokemon":"Air","attacks":[],"defenses":[]}
+{"maxHealth":100,"currentHealth":100,"name":"Golbat","typePokemon":"Air","attacks":[{"name":"Gust","element":"air","type":"BlastAttack"},{"name":"Poison Fang","element":"air","type":"ChargeAttack"},{"name":"SmackDown","element":"earth","type":"ChargeAttack"}],"defenses":[{"name":"earth","type":"simple defense"},{"name":"earth","type":"Rock Shell"},{"name":"earth","type":" Stone Shield"}]}

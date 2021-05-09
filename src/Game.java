@@ -14,10 +14,12 @@ import java.util.*;
  * runs the game until the player quits
  */
 public class Game {
+	final static int ITEM_COST = 100;
+
 	public static void main(String[] args) throws Exception {
 		// loads the existing pokemon and items into the game
 		ArrayList<Pokemon> pokemon = loadPokemon();
-		ArrayList<Item> items = new ArrayList<>(List.of(new MaxRevive(100), new Potion(100), new SuperPotion(100)));
+		ArrayList<Item> items = new ArrayList<>(List.of(new MaxRevive(ITEM_COST), new Potion(ITEM_COST), new SuperPotion(ITEM_COST)));
 
 		Scanner sc = new Scanner(System.in);
 		//make new trainer and ask for option
@@ -46,7 +48,7 @@ public class Game {
 				Pokemon fighter = active.getPokemon(o);
 				Pokemon opponent = pokemon.get(rnd.nextInt(pokemon.size()));
 				System.out.println("\t--" + fighter.getName() + " againts " + opponent.getName() + "\t--");
-				boolean hasWon = Battle.fight(fighter, opponent);
+				boolean hasWon = Battle.fight(fighter, opponent, active, items);
 				if (hasWon) {
 					active.addWin();
 					System.out.println("Congratulations you received 100 coins!");
@@ -146,8 +148,8 @@ public class Game {
 			Pokemon p = pokemon.get(rnd.nextInt(pokemon.size()));
 			t.addPokemon(p);
 			t.removeCoins(Pokemon.COST);
-			System.out.println("Congratulations you have received a pokemon!");
-			System.out.println(p.getName());
+			System.out.println("Congratulations you have received " + p.getName() + "!");
+			System.out.println("You now have " + t.getCoins() + " coins");
 		} else {
 			System.out.println("You don't have enough coins to buy a pokemon");
 		}

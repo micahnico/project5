@@ -14,12 +14,14 @@ public class Potion extends Item {
 	 * creates a use method for potion that restores 10 health to a pokemon of your choice
 	 */
 	@Override
-	public void use(Pokemon p) {
+	public boolean use(Pokemon p) {
 		if(p.getCurrentHealth() > 0) {
 			p.addHealth(10);
+			return true;
 		}
 		else {
 			System.out.println("Sorry, Pokemon must be revived in order to use Potion.");
+			return false;
 		}
 	}
 	

@@ -142,7 +142,11 @@ public class Game {
 		}
 	}
 
-
+	/**
+	 * gets players choice of what they desire to do
+	 * @return
+	 * @throws Exception
+	 */
 	public static int presentMenu() throws Exception{
 		Scanner sc = new Scanner(System.in);
 		//Options
@@ -165,6 +169,11 @@ public class Game {
 		return opt;
 	}
 
+	/**
+	 * method to purchase and add a pokemon to a players inventory
+	 * @param t Trainer
+	 * @param pokemon arrylist of pokemon
+	 */
 	public static void buyPokemon(Trainer t, ArrayList<Pokemon> pokemon) {
 		System.out.println("You have " + t.getCoins() + " coins");
 		if (t.getCoins() >= Pokemon.COST) {
@@ -179,6 +188,11 @@ public class Game {
 		}
 	}
 
+	/**
+	 * choose a pokemon from the inventory
+	 * @param max maximum index in the inventory/size
+	 * @return index of the pokemon
+	 */
 	public static int choosePokemon(int max) {
 		Scanner sc = new Scanner(System.in);
 

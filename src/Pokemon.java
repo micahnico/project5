@@ -3,6 +3,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Parent class for all pokemon
+ */
 public class Pokemon {
 	final static int COST = 200;
 
@@ -15,7 +18,7 @@ public class Pokemon {
 	//Lists of attacks of the pokemon
 	final private ArrayList<Attack> attacks;
 	final private ArrayList<Defense> defenses;
-
+//constructor for a  new pokemon object
 	public Pokemon(String type, String newName, int maxHealth) {
 		this.typePokemon = type;
 		this.name = newName;
@@ -24,7 +27,7 @@ public class Pokemon {
 		attacks = new ArrayList<>();
 		defenses = new ArrayList<>();
 	}
-
+//deepcopy constructor for pokemon
 	public Pokemon(Pokemon other) {
 		this.typePokemon = other.typePokemon;
 		this.name = other.name;
@@ -34,7 +37,7 @@ public class Pokemon {
 		attacks = other.attacks;
 		defenses = other.defenses;
 	}
-
+//prints the info of the individual pokemon
 	public void getInfo(){
 		System.out.println("Name: " + getName());
 		System.out.println("Type: " + getTypePokemon());

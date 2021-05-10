@@ -14,7 +14,6 @@ public class Trainer implements Database {
 	private int losses;
 	private int coins;
 	private ArrayList<Pokemon> pokemonInv;
-	private ArrayList<Item> itemInv;
 
 	/**
 	 * creates new trainer and gives them a name or finds an existing trainer in the "database"

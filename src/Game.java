@@ -15,7 +15,7 @@ import java.util.*;
  * @author prince
  */
 public class Game {
-	final static int ITEM_COST = 100;
+	final static int ITEM_COST = 50;
 
 	public static void main(String[] args) throws Exception {
 		// loads the existing pokemon and items into the game
@@ -48,7 +48,7 @@ public class Game {
 				Random rnd = new Random();
 				Pokemon fighter = active.getPokemon(o);
 				Pokemon opponent = pokemon.get(rnd.nextInt(pokemon.size()));
-				System.out.println("\t--" + fighter.getName() + " againts " + opponent.getName() + "\t--");
+				System.out.println("\t--" + fighter.getName() + " against " + opponent.getName() + "\t--");
 				boolean hasWon = Battle.fight(fighter, opponent, active, items);
 				if (hasWon) {
 					active.addWin();
@@ -62,7 +62,7 @@ public class Game {
 			} else if (opt == 3) {
 				System.out.println();
 				System.out.println("Current inventory: ");
-				System.out.println("Enter the number beside each pokemon to view it");
+				System.out.println("Enter the number beside a pokemon to view it");
 				active.printPokemon();
 				int max = active.pokemonList().size();
 				if (max < 1) {
@@ -166,8 +166,8 @@ public class Game {
 				opt = sc.nextInt();
 			} catch (Exception e) {
 				System.out.println("That's not a number!");
-				sc.nextLine();
 			}
+			sc.nextLine();
 		}
 		return opt - 1;
 	}

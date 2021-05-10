@@ -16,12 +16,12 @@ public class MaxRevive extends Item {
 	 */
 	@Override
 	public boolean use(Pokemon p) {
-		if(p.getCurrentHealth() == 0) {
+		if(p.getCurrentHealth() <= 10) {
 			p.setToMaxHealth();
 			return true;
 		}
 		else {
-			System.out.println("Pokemon must have health of 0 to use Max Revive.");
+			System.out.println("Pokemon must have health of 10 or less to use Max Revive.");
 			return false;
 		}
 	}

@@ -111,6 +111,10 @@ public class Battle {
 				System.out.println(p1.getAttack(choice - 1).getName() + " lose " + healthToRemove);
 			}
 
+			// make sure health is put back to max after battle
+			p1.setToMaxHealth();
+			p2.setToMaxHealth();
+
 			if (p1.getCurrentHealth() > 0){
 				System.out.println(p1.getName() + " won");
 				return true;

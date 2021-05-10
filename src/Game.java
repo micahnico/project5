@@ -2,8 +2,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
+import javax.sound.sampled.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -18,6 +18,9 @@ public class Game {
 	final static int ITEM_COST = 50;
 
 	public static void main(String[] args) throws Exception {
+		// start those jams
+		playMusic();
+
 		// loads the existing pokemon and items into the game
 		ArrayList<Pokemon> pokemon = loadPokemon();
 		ArrayList<Item> items = new ArrayList<>(List.of(new MaxRevive(ITEM_COST), new Potion(ITEM_COST), new SuperPotion(ITEM_COST)));
@@ -119,6 +122,26 @@ public class Game {
 		}
 		return filesToLoad;
 	}
+
+	/**
+	 * plays some beautiful pokemon music
+	 * @author micahnico
+	 */
+	public static void playMusic() {
+		File audioFile = new File("pokemonmusic.wav");
+		AudioInputStream audioStream;
+		try {
+			audioStream = AudioSystem.getAudioInputStream(audioFile);
+			AudioFormat format = audioStream.getFormat();
+			DataLine.Info info = new DataLine.Info(Clip.class, format);
+			Clip audioClip = (Clip) AudioSystem.getLine(info);
+			audioClip.open(audioStream);
+			audioClip.start();
+		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+			System.out.println("Could not play music, sorry :(");
+		}
+	}
+
 
 	public static int presentMenu() throws Exception{
 		Scanner sc = new Scanner(System.in);

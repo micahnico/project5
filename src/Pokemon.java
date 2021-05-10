@@ -18,7 +18,13 @@ public class Pokemon {
 	//Lists of attacks of the pokemon
 	final private ArrayList<Attack> attacks;
 	final private ArrayList<Defense> defenses;
-//constructor for a  new pokemon object
+
+	/**
+	 * constructor for a  new pokemon object
+	 * @param type
+	 * @param newName
+	 * @param maxHealth
+	 */
 	public Pokemon(String type, String newName, int maxHealth) {
 		this.typePokemon = type;
 		this.name = newName;
@@ -27,7 +33,11 @@ public class Pokemon {
 		attacks = new ArrayList<>();
 		defenses = new ArrayList<>();
 	}
-//deepcopy constructor for pokemon
+
+	/**
+	 * deep copy constructor for pokemon
+	 * @param other
+	 */
 	public Pokemon(Pokemon other) {
 		this.typePokemon = other.typePokemon;
 		this.name = other.name;
@@ -37,7 +47,10 @@ public class Pokemon {
 		attacks = other.attacks;
 		defenses = other.defenses;
 	}
-//prints the info of the individual pokemon
+
+	/**
+	 * prints the info of the individual pokemon
+	 */
 	public void getInfo(){
 		System.out.println("Name: " + getName());
 		System.out.println("Type: " + getTypePokemon());
@@ -52,50 +65,88 @@ public class Pokemon {
 		}
 
 	}
+
+	/**
+	 * @return pokemon name
+	 */
 	public String getName() {
 		return this.name;
 	}
 
-	// returns type of Pokemon
+	/**
+	 * @return type of pokemon
+	 */
 	public String getTypePokemon() {
 		return typePokemon;
 	}
 
-	// returns Pokemons possible max health
+	/**
+	 * @return Pokemon's possible max health
+	 */
 	public int getMaxHealth() {
 		return maxHealth;
 	}
 
-	// returns Pokemons current health
+	/**
+	 * @return Pokemon's current health
+	 */
 	public int getCurrentHealth() {
 		return currentHealth;
 	}
 
-	// sets current health to max health
+	/**
+	 * sets current health to max health
+	 */
 	public void setToMaxHealth() {
 		currentHealth = maxHealth;
 	}
 
+	/**
+	 * removes health from pokemon
+	 * @param damage health to remove from pokemon
+	 */
 	public void takeDamage(int damage) {
 		currentHealth -= damage;
 	}
 
+	/**
+	 * gets the defense at index i of pokemon's defenses
+	 * @param i index
+	 * @return Defense object
+	 */
 	public Defense getDefense(int i) {
 		return defenses.get(i);
 	}
 
+	/**
+	 * adds defense to pokemon
+	 * @param d Defense to add
+	 */
 	public void addDefense(Defense d){
 		defenses.add(d);
 	}
 
+	/**
+	 * gets the Attack at index i of pokemon's attacks
+	 * @param i index
+	 * @return Attack object
+	 */
 	public Attack getAttack(int i) {
 		return attacks.get(i);
 	}
 
+	/**
+	 * adds attack to pokemon
+	 * @param a Attack to add
+	 */
 	public void addAttack(Attack a){
 		attacks.add(a);
 	}
 
+	/**
+	 * adds health to the pokemon's currentHealth
+	 * @param amt health to add
+	 */
 	public void addHealth(int amt) {
 		this.currentHealth += amt;
 		if (this.currentHealth > this.maxHealth) {
@@ -103,6 +154,11 @@ public class Pokemon {
 		}
 	}
 
+	/**
+	 * checks if pokemon are equal to each other
+	 * @param o pokemon
+	 * @return boolean
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

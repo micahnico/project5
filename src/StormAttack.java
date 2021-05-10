@@ -5,7 +5,7 @@ public class StormAttack extends Attack{
     }
 
     /**
-     * This contains the algorith that will determine the number of damages done by an attack
+     * This contains the algorithm that will determine the number of damages done by an attack
      * In function fo the opponent and the defense proposed by the opponent
      * It returns an int which is the damages done after the calculation.
      * We can use that with a simple takeDamage(int h) for the fights.

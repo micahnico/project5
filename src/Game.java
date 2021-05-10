@@ -13,6 +13,8 @@ import java.util.*;
 /**
  * runs the game until the player quits
  * @author prince
+ * @author micahnico
+ * @author Philippe
  */
 public class Game {
 	final static int ITEM_COST = 50;
@@ -131,12 +133,23 @@ public class Game {
 		File audioFile = new File("pokemonmusic.wav");
 		AudioInputStream audioStream;
 		try {
+			// set up the music track
 			audioStream = AudioSystem.getAudioInputStream(audioFile);
 			AudioFormat format = audioStream.getFormat();
 			DataLine.Info info = new DataLine.Info(Clip.class, format);
 			Clip audioClip = (Clip) AudioSystem.getLine(info);
 			audioClip.open(audioStream);
 			audioClip.start();
+			// create a linelistener so that the music will loop
+			LineListener listener = event -> {
+				if (event.getType() != LineEvent.Type.STOP) {
+					return;
+				}
+				// restart the music
+				audioClip.setMicrosecondPosition(0);
+				audioClip.start();
+			};
+			audioClip.addLineListener(listener);
 		} catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
 			System.out.println("Could not play music, sorry :(");
 		}
@@ -144,7 +157,7 @@ public class Game {
 
 	/**
 	 * gets players choice of what they desire to do
-	 * @return
+	 * @return choice
 	 * @throws Exception
 	 */
 	public static int presentMenu() throws Exception{

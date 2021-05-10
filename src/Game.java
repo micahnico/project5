@@ -59,7 +59,7 @@ public class Game {
 					active.addCoins(1);
 					active.addLoss();
 				}
-			} else if (opt == 3) {
+			} else if (opt == 3) {//look at inventory
 				System.out.println();
 				System.out.println("Current inventory: ");
 				System.out.println("Enter the number beside a pokemon to view it");

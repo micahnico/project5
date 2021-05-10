@@ -12,6 +12,7 @@ import java.util.*;
 
 /**
  * runs the game until the player quits
+ * @author prince
  */
 public class Game {
 	final static int ITEM_COST = 100;

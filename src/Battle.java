@@ -1,7 +1,10 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
-
+/**
+ * runs the battle until a winner
+ * @author prince
+ */
 public class Battle {
 		final private static int MAX_ITEM_USES = 3;
 		public static boolean fight(Pokemon p1, Pokemon p2, Trainer t, ArrayList<Item> items) {

@@ -112,11 +112,11 @@ public class Battle {
 			}
 
 			if (p1.getCurrentHealth() > 0){
-				System.out.println(p1.getName() + "won");
+				System.out.println(p1.getName() + " won");
 				return true;
 			}
 			else{
-				System.out.println(p2.getName() + "won");
+				System.out.println(p2.getName() + " won");
 				return false;
 			}
 
